@@ -1,5 +1,5 @@
 const path = require('path');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
@@ -44,12 +44,12 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js']
     },
     output: {
-        filename: 'project.js',
+        filename: 'roguelike.js',
         path: path.resolve(__dirname, 'dist'),
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
     plugins: [
-        new LodashModuleReplacementPlugin(),
+        new ESLintPlugin({ extensions: ['.ts', '.tsx']}),
     ]
 };
