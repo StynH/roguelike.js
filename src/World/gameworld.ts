@@ -3,11 +3,10 @@ import {ComponentManager} from "../ECS/Component/componentmanager";
 import {RenderingSystem} from "../ECS/System/rendersystem";
 import {Window} from "../Window/window";
 import {RandomNumberGenerator} from "../Helper/randomnumbergenerator";
-import {TreeFactory} from "../ECS/Entity/treefactory";
 import {LifecycleSystem} from "../ECS/System/lifecyclesystem";
-import {MushroomFactory} from "../ECS/Entity/mushroomfactory";
 import {MessageBus} from "../MessageBus/messagebus";
-import {DebugEmitterSystem} from "../ECS/System/Debug/debugemittersystem";
+import {FlowerFactory} from "../ECS/Entity/flowerfactory";
+import {PollinatorSystem} from "../ECS/System/Genetics/pollinatorsystem";
 
 export class GameWorld {
     private debugCount = 0;
@@ -28,9 +27,7 @@ export class GameWorld {
 
         this.systems.push(new RenderingSystem(this.componentManager, this.window));
         this.systems.push(new LifecycleSystem(this.componentManager));
-
-        //DEBUG
-        this.systems.push(new DebugEmitterSystem(this.componentManager, this.messageBus));
+        this.systems.push(new PollinatorSystem(this.componentManager, this.messageBus));
     }
 
     public update(): void{
@@ -51,19 +48,13 @@ export class GameWorld {
     }
 
     public debug(): void{
-        const treeFactory = new TreeFactory();
-        const mushroomFactory = new MushroomFactory();
+        const flowerFactory = new FlowerFactory();
 
         for(let c = 0; c < GameWorld.WIDTH; ++c){
             for(let r = 0; r < GameWorld.HEIGHT; ++r){
                 const rand = RandomNumberGenerator.randomInt(0, 100);
                 if(rand > 98){
-                    const colorVariant = RandomNumberGenerator.randomInt(-60, 60);
-                    treeFactory.createEntity(this.componentManager, c, r, colorVariant);
-                }
-                else if(rand < 2){
-                    const colorVariant = RandomNumberGenerator.randomInt(-15, 15);
-                    mushroomFactory.createEntity(this.componentManager, c, r, colorVariant);
+                    flowerFactory.createEntity(this.componentManager, c, r);
                 }
             }
         }

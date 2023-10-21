@@ -24,8 +24,8 @@ export class Window{
     }
 
     private setupGrid(): void {
-        this.div.style.gridTemplateRows = `repeat(${this.rows}, 16px)`;
-        this.div.style.gridTemplateColumns = `repeat(${this.cols}, 16px)`;
+        this.div.style.gridTemplateRows = `repeat(${this.rows}, 18px)`;
+        this.div.style.gridTemplateColumns = `repeat(${this.cols}, 18px)`;
 
         for (let row = 0; row < this.rows; row++) {
             const rowCells: HTMLElement[] = [];

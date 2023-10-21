@@ -18,7 +18,7 @@ export class LifecycleSystem {
                 const currentState = lifecycle.states[lifecycle.currentState];
 
                 if (currentState.onTransition) {
-                    currentState.onTransition(this.componentManager, position.x, position.y);
+                    currentState.onTransition(this.componentManager, position.x, position.y, entity);
                 }
 
                 if(currentState.diesOnTransition){

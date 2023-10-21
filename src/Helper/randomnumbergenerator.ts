@@ -1,4 +1,5 @@
 export class RandomNumberGenerator {
+
     public static randomInt(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -33,4 +34,22 @@ export class RandomNumberGenerator {
 
         throw new Error('Invalid distribution');
     }
+
+    public static randomHex(length: number): string {
+        if (length <= 0) {
+            throw new Error("Length should be greater than 0");
+        }
+
+        let result: string = "";
+        const characters: string = "0123456789ABCDEF";
+        const charactersLength: number = characters.length;
+
+        for (let i = 0; i < length; i++) {
+            const randomIndex: number = Math.floor(Math.random() * charactersLength);
+            result += characters.charAt(randomIndex);
+        }
+
+        return result;
+    }
+
 }
